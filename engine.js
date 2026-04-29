@@ -54,7 +54,7 @@ const sceneEl=document.getElementById('scene');
 const speakerEl=document.getElementById('speaker-name');
 const textEl=document.getElementById('dialogue-text');
 const continueBtn=document.getElementById('continue-btn');
-const progressBar=document.getElementById('progress-bar');
+
 const dialogueBox=document.getElementById('dialogue-box');
 let waitingForContinue=false,continueResolve=null,typewriterDone=false,_twTimer=null;
 
@@ -65,7 +65,7 @@ sceneEl.addEventListener('click',advanceScene);
 function advanceScene(){if(!typewriterDone)return;if(waitingForContinue&&continueResolve){waitingForContinue=false;const r=continueResolve;continueResolve=null;r();}}
 function waitContinue(){return new Promise(r=>{waitingForContinue=true;continueResolve=r;});}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
-function setProgress(p){progressBar.style.width=p+'%';}
+function setProgress(p){}
 async function fadeOut(ms=600){const fo=document.getElementById('fade-overlay');fo.style.transition=`opacity ${ms/1000}s ease`;fo.style.opacity='1';await sleep(ms);}
 async function fadeIn(ms=600){const fo=document.getElementById('fade-overlay');fo.style.transition=`opacity ${ms/1000}s ease`;fo.style.opacity='0';await sleep(ms);}
 
@@ -77,8 +77,10 @@ async function showAct(num,bgScene,onDisappear=null){
   const fo=document.getElementById('fade-overlay');
   const ov=document.getElementById('act-overlay'),tx=document.getElementById('act-title-text');
   tx.textContent='Acte '+['I','II','III','IV','V'][num-1];
+  document.getElementById('location-banner').className='';
   ov.style.opacity='1';ov.classList.add('active');
   stageHideAll();
+  await sleep(700);
   fo.style.transition='none';fo.style.opacity='0';fo.offsetHeight;fo.style.transition='';
   await sleep(3200);
   if(bgScene)setBgScene(bgScene);
@@ -159,11 +161,17 @@ async function showEndScreen(lines){
   const sc=document.getElementById('end-screen'),ct=document.getElementById('end-content');
   const titleEl=document.getElementById('end-title-display');
   const contBtn=document.getElementById('end-continue-btn');
-  ct.innerHTML='';sc.classList.add('active');titleEl.style.opacity='0';
+  ct.innerHTML='';
+  // Masquer d'abord le bouton terminer avant toute activation
+  contBtn.style.opacity='0';contBtn.style.pointerEvents='none';
+  titleEl.style.opacity='0';
   document.getElementById('restart-btn').classList.remove('shown');
   document.getElementById('credits-btn').classList.remove('shown');
   document.getElementById('suite-btn').classList.remove('shown');
-  contBtn.style.opacity='0';contBtn.style.pointerEvents='none';
+  // Activer l'end-screen instantanément derrière le fade-overlay noir
+  sc.style.transition='none';sc.classList.add('active');sc.offsetHeight;sc.style.transition='';
+  // Effacer le fade-overlay maintenant que l'end-screen est opaque
+  const _foE=document.getElementById('fade-overlay');_foE.style.transition='none';_foE.style.opacity='0';_foE.offsetHeight;_foE.style.transition='';
   // Phase 1 — phrases de fin
   for(const ln of lines){
     const el=document.createElement('span');el.className='end-line';el.textContent=ln;

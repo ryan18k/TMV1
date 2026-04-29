@@ -174,11 +174,11 @@ html,body{width:100%;height:100%;background:#060608;overflow:hidden;font-family:
 #end-content{max-width:580px;text-align:center;}
 .end-line{font-size:15px;line-height:2.1;color:#b8b4a8;font-style:italic;opacity:0;transition:opacity 1.2s ease;display:block;}
 .end-line.shown{opacity:1;}
-#end-title-display{font-size:clamp(22px,4vw,34px);letter-spacing:.25em;text-transform:uppercase;color:#8a9aaa;margin-top:48px;text-align:center;opacity:0;transition:opacity 1s ease;}#end-version{font-size:11px;letter-spacing:.3em;color:#4a5468;text-transform:uppercase;margin-top:10px;}
+#end-title-display{font-size:clamp(24px,4.5vw,42px);letter-spacing:.25em;text-transform:uppercase;color:#8a9aaa;margin-top:24px;text-align:center;opacity:0;transition:opacity 1s ease;}#end-version{font-size:11px;letter-spacing:.3em;color:#4a5468;text-transform:uppercase;margin-top:10px;}
 #end-buttons{display:flex;gap:24px;margin-top:28px;justify-content:center;}
-#restart-btn,#credits-btn,#suite-btn{background:none;border:none;color:#7a8090;font-size:10px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-family:Georgia,serif;opacity:0;transition:opacity 1s ease,color .3s;}
+#restart-btn,#credits-btn,#suite-btn{background:none;border:0.5px solid #2a3040;color:#4a5060;font-family:Georgia,serif;font-size:11px;letter-spacing:.25em;text-transform:uppercase;padding:11px 28px;cursor:pointer;opacity:0;transition:opacity 1s ease,border-color .3s,color .3s;}
 #restart-btn.shown,#credits-btn.shown,#suite-btn.shown{opacity:1;}
-#restart-btn:hover,#credits-btn:hover,#suite-btn:hover{color:#aab8c8;}
+#restart-btn:hover,#credits-btn:hover,#suite-btn:hover{border-color:#5a6070;color:#8a9098;}
 
 /* CREDITS */
 #credits-screen{position:fixed;inset:0;background:#000;z-index:190;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;opacity:0;pointer-events:none;transition:opacity 0.8s ease;text-align:center;}
@@ -203,7 +203,7 @@ html,body{width:100%;height:100%;background:#060608;overflow:hidden;font-family:
 </style>
 </head>
 <body>
-<div id="bg-layer"></div><div id="bg-overlay"></div><div id="progress-bar"></div>
+<div id="bg-layer"></div><div id="bg-overlay"></div>
 <div id="disclaimer-screen"><div id="disclaimer-inner"><p>Traitement Moral est une <span>œuvre de fiction</span> à caractère narratif et éducatif. Toute ressemblance avec des personnes réelles, vivantes ou décédées, des établissements existants ou des événements avérés serait purement fortuite. Les protocoles, terminologies et procédures médicales représentés dans ce récit ont été librement adaptés à des fins dramatiques et ne sauraient constituer une référence clinique, scientifique ou professionnelle.</p><p style="margin-top:20px;font-style:normal;letter-spacing:.12em;font-size:11px;color:#2a3240;text-align:right;">Ryan Debabêche</p><div id="disclaimer-continue">continuer</div></div></div>
 <div id="splash-screen"><div id="splash-inner"><div id="splash-title"><span class="big">T</span>raitement&nbsp;<span class="big">M</span>oral</div><div id="splash-sub">par Ryan Debabêche</div><button id="splash-btn">commencer</button></div></div>
 <div id="act-overlay"><div id="act-title-text"></div></div>
@@ -225,15 +225,15 @@ html,body{width:100%;height:100%;background:#060608;overflow:hidden;font-family:
     <div class="choice-half" onclick="makeChoice('right')"><div class="pulse-dot" id="pulse-right"></div><div class="choice-label" id="choice-right-text"></div><div class="choice-sublabel" id="choice-right-sub"></div></div>
   </div>
 </div>
-<div id="end-screen"><div id="end-content"></div><button id="end-continue-btn">terminer</button><div id="end-title-display"><span style="font-size:1.1em;color:#5a6878">T</span>raitement&nbsp;<span style="font-size:1.1em;color:#5a6878">M</span>oral<div id="end-version">Version&nbsp;1</div></div><div id="end-buttons"><button id="restart-btn" onclick="restartGame()">recommencer</button><button id="credits-btn" onclick="showCredits()">crédits</button><button id="suite-btn" onclick="goToQuestionnaire()">suite</button></div></div>
+<div id="end-screen"><div id="end-content"></div><button id="end-continue-btn">terminer</button><div id="end-title-display"><span style="font-size:1.22em;color:#6a7888">T</span>raitement&nbsp;<span style="font-size:1.22em;color:#6a7888">M</span>oral<div id="end-version">Version&nbsp;1</div></div><div id="end-buttons"><button id="credits-btn" onclick="showCredits()">crédits</button><button id="restart-btn" onclick="restartGame()">recommencer</button><button id="suite-btn" onclick="goToQuestionnaire()">suite</button></div></div>
 <div id="credits-screen"><h2><span style="font-size:1.18em;color:#5a6878">T</span>raitement&nbsp;<span style="font-size:1.18em;color:#5a6878">M</span>oral</h2><p style="color:#5a6070;font-style:italic;margin-bottom:24px">Un jeu narratif comme support de travail de maturité</p><p class="credit-role">Conception &amp; Narration</p><p>Ryan Debabêche</p><p class="credit-role">Illustrations</p><p>Gemini (Google)</p><p class="credit-role">Musiques</p><p>Tension Time — Soundridemusic</p><p>Silent Drift — CinematicSounds</p><p class="credit-role">Code du jeu</p><p>Claude (Anthropic)</p><p class="credit-role">Travail de Maturité</p><p>2026</p><button id="credits-back" onclick="hideCredits()">retour</button></div>
 <div id="game-title"><span style="color:#1e2840;font-size:1.15em">T</span>raitement <span style="color:#1e2840;font-size:1.15em">M</span>oral</div>
 <div id="portrait-store" style="display:none">
-  <img id="p_claude" src="images/claude_neutre.png"><img id="p_claude_med_sourire" src="images/claude_med_sourire.png"><img id="p_claude_med_neutre" src="images/claude_med_neutre.png"><img id="p_claude_civil_neutre" src="images/claude_civil_neutre.png"><img id="p_claude_civile_tendre" src="images/claude_civile_tendre.png"><img id="p_claude_chir_mask" src="images/claude_chir_mask.png"><img id="p_claude_chir_nomask" src="images/claude_chir_nomask.png">
-  <img id="p_gerard" src="images/gerard_calme.png"><img id="p_gerard_souriant" src="images/gerard_souriant.png"><img id="p_gerard_serieux" src="images/gerard_serieux.png">
+  <img id="p_claude" src="images/claude_med_neutre.png"><img id="p_claude_med_sourire" src="images/claude_med_sourire.png"><img id="p_claude_med_neutre" src="images/claude_med_neutre.png"><img id="p_claude_civil_neutre" src="images/claude_civil_neutre.png"><img id="p_claude_civile_tendre" src="images/claude_civile_tendre.png"><img id="p_claude_chir_mask" src="images/claude_chir_mask.png"><img id="p_claude_chir_nomask" src="images/claude_chir_nomask.png">
+  <img id="p_gerard" src="images/gerard_serieux.png"><img id="p_gerard_souriant" src="images/gerard_souriant.png"><img id="p_gerard_serieux" src="images/gerard_serieux.png">
   <img id="p_antoine_masque" src="images/antoine_masque.png"><img id="p_antoine_serieux" src="images/antoine_serieux.png"><img id="p_antoine_chir_serieux" src="images/antoine_chir_serieux.png"><img id="p_antoine_inquiet_civil" src="images/antoine_inquiet_civil.png">
-  <img id="p_lucas" src="images/lucas_inquiet.png"><img id="p_lucas_pyj_calme" src="images/lucas_pyj_calme.png"><img id="p_lucas_pyj_inquiet" src="images/lucas_pyj_inquiet.png"><img id="p_lucas_pyj_sourire" src="images/lucas_pyj_sourire.png">
-  <img id="p_infirmiere" src="images/infirmiere_neutre.png"><img id="p_infirmiere_inquiete" src="images/infirmiere_inquiete.png">
+  <img id="p_lucas_pyj_calme" src="images/lucas_pyj_calme.png"><img id="p_lucas_pyj_inquiet" src="images/lucas_pyj_inquiet.png"><img id="p_lucas_pyj_sourire" src="images/lucas_pyj_sourire.png">
+  <img id="p_infirmiere" src="images/infirmiere_inquiete.png"><img id="p_infirmiere_inquiete" src="images/infirmiere_inquiete.png">
 </div>
 <script src="engine.js"></script>
 <script src="story.js"></script>

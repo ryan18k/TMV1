@@ -23,12 +23,12 @@ async function runGame(){
     'Gérard': {key:'gerard'},
   };
 
-  await say('Claude','Demain matin. Sept heures. La salle deux est réservée. Bonne lumière, bon équipement, la meilleure équipe.');
+  await say('Claude','Demain. Quinze heures trente. La salle deux est réservée. Bonne lumière, bon équipement, la meilleure équipe.');
   SCENE_CAST['Gérard'] = {key:'gerard_serieux'};
   await say('Gérard','Vous dites ça à tous vos patients ?');
   SCENE_CAST['Claude'] = {key:'claude_med_sourire'};
   await say('Claude','Non. Seulement quand c\'est vrai.');
-  await say(null,'Un silence confortable s\'installa. Dehors, le lac était couleur d\'étain sous un ciel de mai qui n\'arrivait pas à se décider.',true);
+  await say(null,'Un silence confortable s\'installa. Dehors, le lac était couleur d\'étain sous un ciel de janvier qui n\'arrivait pas à se décider.',true);
   await say('Gérard','Vous savez ce que ma femme m\'a dit ce matin, avant de rentrer chez nous ? Elle m\'a dit de faire confiance au docteur. Comme si c\'était aussi simple que ça.');
   await say('Claude','Elle a raison.');
   SCENE_CAST['Gérard'] = {key:'gerard_souriant'};
@@ -109,7 +109,7 @@ async function runGame(){
   await fadeOut(800); stageHideAll(); await sleep(200);
   await showAct(3,'hospital',playMusicTension);
   setProgress(34);
-  await showLocation('CHUV - Bloc opératoire n°2','08:23');
+  await showLocation('CHUV - Bloc opératoire n°2','15:32');
 
   SCENE_CAST = {
     'Claude':  {key:'claude_chir_mask'},
@@ -125,7 +125,7 @@ async function runGame(){
   await say(null,'Antoine avait vingt-sept ans. Tout juste promu chirurgien, brillant. Claude l\'avait choisi lui-même. Ce matin, ses mains tremblaient légèrement.',true);
   SCENE_CAST['Antoine'] = {key:'antoine_serieux'};
   await say('Antoine','Je n\'ai jamais vu un anévrisme à cet endroit. Pas en vrai. Seulement sur les images.');
-  await say('Claude','Moi non plus la première fois. Tu regardes, tu apprends, et quand je te demande quelque chose, tu exécutes. C\'est le rôle de l\'assistant. Tu comprends ?');
+  await say('Claude','Moi non plus la première fois. Tu regardes, tu apprends, et quand je te demande quelque chose, tu exécutes. C\'est le rôle du second. Tu comprends ?');
   SCENE_CAST['Antoine'] = {key:'antoine_serieux'};
   await say('Antoine','Compris.');
   await say('Claude','Bien. Préparons le champ.');
@@ -215,6 +215,7 @@ async function runGame(){
   await say(null,'Le silence dans le bloc fut total. Même le moniteur semblait retenir son souffle.',true);
   await say('Antoine','Bon sang…');
   await say('Claude','Il n\'y a pas d\'autre chirurgien disponible. C\'est toi ou moi. L\'un de nous doit aller là-bas.');
+  SCENE_CAST['Antoine'] = {key:'antoine_masque'};
   await say('Antoine','Claude. Je ne peux pas terminer ça seul. Vous le savez. Ce n\'est pas de la modestie, c\'est la réalité. Si je perds la pression au niveau de la bifurcation, je ne saurai pas quoi faire.');
   await say('Claude','Tu sauras. J\'ai vu tes mains ce matin. Elles ne tremblent plus.');
   await say('Antoine','Et si je rate ? Si Gérard meurt sur cette table parce que vous n\'êtes pas là ?');
@@ -250,6 +251,7 @@ async function runGame(){
     await say('Antoine','Je comprends.');
     await say('Claude','Alors va. Va et fais ce que tu sais faire. Mon fils a neuf ans et il a besoin de toi.');
     await say('Antoine','Et si je n\'y arrive pas ?');
+    SCENE_CAST['Antoine'] = {key:'antoine_chir_serieux'};
     await say('Claude','Tu y arriveras. Parce que tu n\'as pas le droit de ne pas y arriver.');
   } else {
     await say('Claude','Antoine. Tu vas finir ici. Seul.');
@@ -259,6 +261,7 @@ async function runGame(){
     await say('Claude','Et Lucas ne survivra pas si personne ne va là-bas.');
 
     await say('Antoine','Et si je rate ?');
+    SCENE_CAST['Antoine'] = {key:'antoine_chir_serieux'};
     await say('Claude','Antoine. Regarde-moi. Tu as les mains que j\'avais à ton âge. Peut-être meilleures. Je ne dis pas ça pour te rassurer, je le dis parce que c\'est vrai et que tu dois le savoir maintenant.');
     await say('Antoine','Je ferai tout ce que je peux.');
     await say('Claude','Je le sais. C\'est pour ça que je te fais confiance.');
@@ -292,9 +295,6 @@ async function runGame(){
     right: {label:'Partir opérer Lucas', sub:'laisser Antoine opérer Gérard'},
   });
 
-  await fadeIn(400);
-  sceneEl.classList.add('visible');
-
   setProgress(75);
 
   // ════════════════════════════════════════════════════════
@@ -303,7 +303,7 @@ async function runGame(){
   await fadeOut(600); stageHideAll(); await sleep(300);
   await showAct(4,'hospital');
   setProgress(80);
-  await showLocation(choix2==='left'?'CHUV - Bloc opératoire n°2':'CHUV - Bloc opératoire n°4','11:28');
+  await showLocation(choix2==='left'?'CHUV - Bloc opératoire n°2':'CHUV - Bloc opératoire n°4','17:09');
 
   SCENE_CAST = {
     'Claude':  {key:'claude_masque'},
@@ -386,7 +386,7 @@ async function runGame(){
   await fadeOut(800); stageHideAll(); await sleep(200);
   await showAct(5,'or');
   setProgress(92);
-  await showLocation('CHUV - Couloirs','14:35');
+  await showLocation('CHUV - Couloirs','19:23');
 
   SCENE_CAST = {'Claude':{key:'claude_chir_mask'}};
 
@@ -420,8 +420,7 @@ async function runGame(){
     await say(null,'Il pensa à la question que Gérard lui avait posée la veille.',true);
     await say(null,'Il avait dit qu\'il ferait tout ce qui était en son pouvoir…',true);
     await say(null,'… Et que son pouvoir était considérable.',true);
-    await say(null,'La fille de Gérard avait neuf ans. Comme Lucas. Comme la fille que Lucas lui avait demandé de préserver.',true);
-    await say(null,'Il y avait des équations que les mathématiques ne permettent pas de résoudre.',true);
+    await say(null,'La fille de Gérard avait neuf ans. Comme Lucas. Cette fille que Lucas lui avait demandé de préserver.',true);
     await say(null,'Claude s\'approcha de la salle d\'attente. Il prit une inspiration. Il ouvrit la porte.',true);
   }
 
@@ -456,8 +455,10 @@ async function runGame(){
     ];
   }
 
-  await sleep(400);
-  await fadeIn(900);
+  // Masquer instantanément tout pendant que l'écran est encore noir
+  sceneEl.style.transition='none';sceneEl.style.opacity='0';sceneEl.offsetHeight;sceneEl.style.transition='';sceneEl.classList.remove('visible');
+  dialogueBox.style.transition='none';dialogueBox.style.opacity='0';dialogueBox.offsetHeight;dialogueBox.style.transition='';
+  const _lb=document.getElementById('location-banner');_lb.style.transition='none';_lb.style.opacity='0';_lb.offsetHeight;_lb.style.transition='';_lb.className='';
   await showEndScreen(endLines);
 }
 
